@@ -1,0 +1,8 @@
+## Interface: 70100
+## Author: Ivona, Terenas EU
+## Notes: III - Announces spell interrupts
+## Title: Ivona's Interrupt Informer
+## Version: 2
+Interrupted.lua
+Frame.xml
+Frame.lua
