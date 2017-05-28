@@ -3,6 +3,7 @@
 ## Notes: III - Announces spell interrupts
 ## Title: Ivona's Interrupt Informer
 ## Version: 2
+## DefaultState: enabled
 Interrupted.lua
 Frame.xml
 Frame.lua
