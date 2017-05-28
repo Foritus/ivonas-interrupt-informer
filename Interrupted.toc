@@ -1,4 +1,4 @@
-## Interface: 70100
+## Interface: 70200
 ## Author: Ivona, Terenas EU
 ## Notes: III - Announces spell interrupts
 ## Title: Ivona's Interrupt Informer
