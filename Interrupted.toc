@@ -1,8 +1,8 @@
-## Interface: 70300
+## Interface: 80000
 ## Author: Ivona, Terenas EU
-## Notes: III - Announces spell interrupts
+## Notes: Ivona's Interrupt Informer - Announces spell interrupts
 ## Title: Ivona's Interrupt Informer
-## Version: 2
+## Version: 3
 ## DefaultState: enabled
 Interrupted.lua
 Frame.xml

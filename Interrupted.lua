@@ -29,12 +29,6 @@ local interrupts = {
 	[116705] = "Spear Hand Strike"
 }
 
-function Interrupted_OnLoad(self)
-	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
-
-	clientVersionNumber = select(4, GetBuildInfo())
-end
-
 -- Determines where to send message depending upon player context
 local function getMessageChannel()
 
@@ -67,32 +61,31 @@ local function sendMessage(msg)
 end
 
 -- Main event loop handler
-function Interrupted_OnEvent(self, event, ... )
+function handleEvent(self, event, ... )
 
+	
 	-- Variables used for event loop processing
-	local timestamp, eventType, hideCaster, srcGUID, srcName, srcFlags, srcRaidFlags, dstGUID, dstName, dstFlags, dstRaidFlags, spellID, spellName, spellSchool, missType = ...		
-
+	local timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, extraArg1, extraArg2, extraArg3, extraArg4, extraArg5, extraArg6, extraArg7, extraArg8, extraArg9, extraArg10 = CombatLogGetCurrentEventInfo()
+		
 	-- Event not connected to the current user? Then we don't care.
-	if srcGUID ~= UnitGUID("player") then
+	if sourceGUID ~= UnitGUID("player") then
 		return
 	end
-
+			
 	-- If this was a spell interrupt from the current player
 	if eventType == "SPELL_INTERRUPT" then
 
-		local srcSpellId, srcSpellName, srcSpellSchool, dstSpellId, dstSpellName, dstSpellSchool
-		
-		srcSpellId, srcSpellName, srcSpellSchool, dstSpellId, dstSpellSchool, dstSpellName = select(12, ...);
+		local srcSpellId, srcSpellName, srcSpellSchool, dstSpellId, dstSpellSchool, dstSpellName = select(12, CombatLogGetCurrentEventInfo());
 		
 		-- Current raid target icon ID
 		local currentTargetIcon
 
 		-- Get the current raid target icon if applicable
-		if dstGUID == UnitGUID("target") then
+		if destGUID == UnitGUID("target") then
 			currentTargetIcon = GetRaidTargetIndex("target")
-		elseif dstGUID == UnitGUID("focus") then
+		elseif destGUID == UnitGUID("focus") then
 			currentTargetIcon = GetRaidTargetIndex("focus")
-		elseif dstGUID == UnitGUID("mouseover") then
+		elseif destGUID == UnitGUID("mouseover") then
 			currentTargetIcon = GetRaidTargetIndex("mouseover")
 		else 
 			currentTargetIcon = nil
@@ -106,7 +99,7 @@ function Interrupted_OnEvent(self, event, ... )
 		end
 
 		-- Write message to client
-		sendMessage( string.format("Interrupted %s%s's%s %s!", symbol, dstName, symbol, GetSpellLink(dstSpellId) ))
+		sendMessage( string.format("Interrupted %s%s's%s %s!", symbol, destName, symbol, GetSpellLink(dstSpellId) ))
 		
 	elseif eventType == "SPELL_MISSED" and interrupts[spellID] then
 		-- Allocate miss message
@@ -127,4 +120,11 @@ function Interrupted_OnEvent(self, event, ... )
 		-- Write message to client
 		sendMessage(string.format("%s failed on %s (%s)", spellName, dstName, reason or missType))
 	end
+end
+
+function Interrupted_OnLoad(self)
+	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
+	self:SetScript("OnEvent", handleEvent);
+
+	clientVersionNumber = select(4, GetBuildInfo())
 end
