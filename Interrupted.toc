@@ -1,4 +1,5 @@
-## Interface: 80000
+## Interface: 80100
+## X-Min-Interface: 80000
 ## Author: Ivona, Terenas EU
 ## Notes: Ivona's Interrupt Informer - Announces spell interrupts
 ## Title: Ivona's Interrupt Informer
