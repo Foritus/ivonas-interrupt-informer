@@ -1,9 +1,7 @@
 ## Interface: 80200
-## X-Min-Interface: 80000
 ## Author: Ivona, Terenas EU
 ## Notes: Ivona's Interrupt Informer - Announces spell interrupts
 ## Title: Ivona's Interrupt Informer
-## Version: 3.01
 ## DefaultState: enabled
 Interrupted.lua
 Frame.xml
