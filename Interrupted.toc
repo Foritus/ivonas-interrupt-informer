@@ -1,6 +1,6 @@
-## Interface: 80205
-## Author: Ivona, Terenas EU
-## Notes: Ivona's Interrupt Informer - Announces spell interrupts
+## Interface: 80300
+## Author: Ivona, Terenas EU.
+## Notes: Announces spell interrupts, no configuration required
 ## Title: Ivona's Interrupt Informer
 ## DefaultState: enabled
 Interrupted.lua
