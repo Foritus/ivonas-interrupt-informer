@@ -1,4 +1,4 @@
-## Interface: 90002
+## Interface: 90005
 ## Author: Ivona, Terenas EU.
 ## Notes: Announces spell interrupts, no configuration required
 ## Title: Ivona's Interrupt Informer
